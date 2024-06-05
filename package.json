@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "mint": "ts-node mint.ts"
+  },
   "dependencies": {
     "@metaplex-foundation/mpl-candy-machine": "^6.0.1",
     "@metaplex-foundation/mpl-token-metadata": "^3.2.1",
@@ -6,5 +9,9 @@
     "@metaplex-foundation/umi-bundle-defaults": "^0.9.1",
     "@solana/web3.js": "^1.91.7",
     "bs58": "^5.0.0"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
   }
 }

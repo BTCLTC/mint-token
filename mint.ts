@@ -11,7 +11,7 @@ import {
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import { mplCandyMachine } from "@metaplex-foundation/mpl-candy-machine";
 import * as web3 from "@solana/web3.js";
-import secret from "./secret.json";
+import base58 from "bs58";
 
 const connection = new web3.Connection(
   web3.clusterApiUrl("devnet"),
@@ -19,17 +19,18 @@ const connection = new web3.Connection(
 );
 
 const umi = createUmi(connection);
-console.log("Umi", umi);
 
-const userWallet = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(secret));
-console.log("User wallet", userWallet);
+// TODO:
+const privateKey = ""
+const userWallet = umi.eddsa.createKeypairFromSecretKey(base58.decode(privateKey))
+console.log("User wallet", userWallet.publicKey.toString());
 const userWalletSigner = createSignerFromKeypair(umi, userWallet);
-console.log("User wallet signer", userWalletSigner);
 
+// TODO:
 const metadata = {
-  name: " token 2000 ",
-  symbol: "Hidden",
-  description: "Hidden is a test token",
+  name: "name",
+  symbol: "symbol",
+  description: "description",
   uri: "https://cyan-minimum-cheetah-301.mypinata.cloud/ipfs/QmR44SZ1pnfgLaP1psjorvKRjmSpESXxEbyi2m49sxTiPE/hidden.jpeg"
 };
 
@@ -44,8 +45,8 @@ createAndMint(umi, {
   symbol: metadata.symbol,
   uri: metadata.uri,
   sellerFeeBasisPoints: percentAmount(0),
-  decimals: 8,
-  amount: 1000000000_00000000,
+  decimals: 9,
+  amount: 1000000000_000000000,
   tokenOwner: userWallet.publicKey,
   tokenStandard: TokenStandard.Fungible,
 })
